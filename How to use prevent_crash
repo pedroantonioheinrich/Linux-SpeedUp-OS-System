@@ -1,0 +1,75 @@
+
+🚀 Como Usar
+1. Versão Corrigida (Recomendada)
+bash
+# Baixe e torne executável
+chmod +x prevent_crashes.sh
+
+# Execute em background
+./prevent_crashes.sh &
+
+# Verificar se está rodando
+ps aux | grep prevent_crashes
+cat ~/.config/auto_fix/prevent_crashes.log
+2. Usar o Script de Controle
+bash
+chmod +x start_prevent_crashes.sh
+
+# Iniciar
+./start_prevent_crashes.sh start
+
+# Ver status
+./start_prevent_crashes.sh status
+
+# Ver logs
+./start_prevent_crashes.sh log
+
+# Instalar como serviço (inicia automaticamente)
+./start_prevent_crashes.sh install
+3. Versão Leve (poucos recursos)
+bash
+chmod +x lightweight_monitor.sh
+./lightweight_monitor.sh &
+🔧 Solução do Problema Original
+O erro [: -lt: esperava operador unário ocorria porque:
+
+Problema: MEM_FREE poderia estar vazia ou conter texto
+
+Solução: Usar get_free_memory() que sempre retorna número
+
+Melhoria: Adicionar verificação 2>/dev/null e valor padrão
+
+Principais Correções:
+✅ Funções para obter valores numéricos de forma segura
+
+✅ Verificação de existência de comandos (command -v)
+
+✅ Tratamento de erros com 2>/dev/null
+
+✅ Valores padrão quando falha
+
+✅ Verificação de permissões (root vs usuário)
+
+📊 Monitoramento
+Verificar Funcionamento
+bash
+# Verificar se está rodando
+ps aux | grep -E "prevent_crashes|lightweight_monitor"
+
+# Ver logs
+tail -f ~/.config/auto_fix/prevent_crashes.log
+tail -f ~/.system_monitor/monitor.log
+
+# Ver uso de recursos do script
+top -p $(pgrep -f prevent_crashes)
+Desinstalar
+bash
+# Parar todos os monitores
+pkill -f prevent_crashes
+pkill -f lightweight_monitor
+
+# Remover arquivos
+rm -f /tmp/prevent_crashes.pid
+rm -rf ~/.config/auto_fix
+rm -rf ~/.system_monitor
+Agora os scripts estão corrigidos e funcionarão corretamente! 🚀
